@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <a
+      href="https://drive.google.com/file/d/1zwvYfozbrQzRshFj5GES2L9vt9s_o9B7/view?usp=sharing"
+      >ER Diagram Exercise 1 - 2</a
+    >
+    <!-- 
+    >> Exercise 3
+    lab 1 ค้นหาชื่อและอายุจากกะลาสีทุกคน 
+    Answer : 
+        SELECT sname, age FROM sailors;
+    
+    lab2 หาชื่อของกะลาสีเรือทั้งหมดที่จองเรือรหัส 103
+    Answer : 
+        SELECT sname FROM sailors 
+        JOIN reserves ON sailors.sid = reserves.sid 
+        WHERE bid = 103
+        
+    lab3 หา sids ทั้งหมดของกะลาสีเรือที่จองเรือสีแดง
+    Answer : 
+        SELECT DISTINCT sailors.sid, sailors.sname FROM sailors 
+        JOIN reserves ON sailors.sid = reserves.sid 
+        JOIN boats ON reserves.bid = boats.bid WHERE BINARY color = 'red'
+
+    lab4 หาชื่อของกะลาสีเรือทั้งหมดที่จองเรือสีแดง
+    Answer : 
+        SELECT distinct S.sname FROM sailors S 
+        LEFT JOIN Reserves R ON S.sid = R.sid 
+        LEFT JOIN Boats B ON R.bid = B.bid 
+        WHERE B.color = 'red';
+
+
+    lab5 หาสีของเรือทั้งหมดที่ถูกจองโดยกะลาสีเรือชื่อ ‘Lubber’
+    Answer : 
+        SELECT DISTINCT boats.color FROM sailors 
+        JOIN reserves ON sailors.sid = reserves.sid 
+        JOIN boats ON reserves.bid = boats.bid 
+        WHERE BINARY sailors.sname = 'Lubber'
+
+    lab6 หาสีของเรือทั้งหมดที่ถูกจองโดยกะลาสีเรือชื่อ ‘Lubber’
+    Answer : 
+        SELECT DISTINCT sailors.sname FROM sailors 
+        JOIN reserves ON sailors.sid = reserves.sid 
+        JOIN boats ON reserves.bid = boats.bid
+        WHERE B.color = 'Red' OR B.color = 'Green';
+
+
+    lab7 หาคนที่จองเรือทั้งสีเขียวและแดง แต่ต้องใช้ UNION เพราะว่า ใช้ and ตรง b.color ทั้ง red และ green ไม่ได้ เพราะสีตรงได้แค่สีเดียว
+    Answer :
+        SELECT * FROM sailors WHERE 
+        sid IN (SELECT s.sid FROM sailors as s JOIN reserves as r ON s.sid = r.sid  
+        JOIN boats as b ON b.bid = r.bid WHERE b.color = 'Red')
+        AND sid IN
+        (SELECT s.sid FROM sailors as s JOIN reserves as r ON s.sid = r.sid  
+        JOIN boats as b ON b.bid = r.bid WHERE b.color = 'Green')
+    
+    lab8 : หา sids ทั้งหมดของกะลาสีเรือที่จองเรือสีแดงแต่ไม่จองเรือสีเขียว
+    Answer :
+        SELECT DISTINCT sid FROM Sailors S WHERE S.sid IN
+        (SELECT distinct S.sid FROM Sailors S LEFT JOIN Reserves R
+        ON S.sid = R.sid LEFT JOIN Boats B ON R.bid = B.bid
+        WHERE B.color = 'Red')
+        AND S.sid NOT IN
+        (SELECT distinct S.sid FROM Sailors S LEFT JOIN Reserves R
+        ON S.sid = R.sid LEFT JOIN Boats B ON R.bid = B.bid
+        WHERE B.color = 'Green');
+
+    >> Exercise 4
+    4.1 หาจำนวนของกะลาสีเรือทั้งหมด
+    Answer : 
+        SELECT count(*) FROM boatrental.sailors;
+
+    4.2 หาผลรวมของอายุกะลาสีเรือที่มี rating เท่ากับ 10
+    Answer : 
+        SELECT sum(age) FROM boatrental.sailors WHERE rating = 10;
+
+    4.3 หาค่าเฉลี่ยอายุของกะลาสีที่มี rating เท่ากับ 10
+    Answer : 
+        SELECT AVG(S.age) FROM Sailors S WHERE S.rating=10
+
+    4.4 หาชื่อของคนที่มีอายุมากที่สุด
+    Answer : 
+        SELECT S.sname, MAX(S.age) FROM Sailors S
+
+    4.5 หาชื่อของคนที่มีอายุมากที่สุด
+    Answer : 
+        SELECT S.sname, S.age FROM Sailors S 
+        WHERE S.age = ( SELECT MAX(S2.age) FROM Sailors S2 )
+
+    >> Exercise 5
+    5.1 หาเลขบัญชีที่เปิดในสาขาเมือง Riverside
+    Answer : 
+        SELECT A.account_number FROM branch B 
+        LEFT JOIN account A ON B.branch_name = A.branch_name 
+        WHERE B.branch_city = 'Riverside';
+    
+    5.2 หาเลขบัญชีที่เปิดในสาขาชื่อ A หรือ B
+    Answer : 
+        SELECT account_number FROM account 
+        WHERE branch_name = 'A' OR branch_name = 'B';
+
+    5.3 หาจำนวนของเงินทั้งหมดของแต่ละคนฝาก
+    Answer : 
+        SELECT customer_name, sum(balance) FROM depositor D 
+        LEFT JOIN account A ON D.account_number = A.account_number 
+        GROUP BY D.customer_name;
+    
+    5.4 หาจำนวนของเงินทั้งหมดของแต่ละคนฝากที่มีบัญชีธนาคารอย่างน้อย 2 บัญชี
+    Answer : 
+        SELECT customer_name, sum(balance) FROM depositor D 
+        LEFT JOIN account A ON D.account_number = A.account_number 
+        GROUP BY D.customer_name 
+        HAVING count(*) > 1;
+
+    5.5 หาจำนวนของเงินทั้งหมดของแต่ละคนฝากที่มีบัญชีธนาคารอย่างน้อย 2 บัญชี โดยเรียงจากมากไปน้อย
+    Answer : 
+        SELECT customer_name, sum(balance) FROM depositor D 
+        LEFT JOIN account A ON D.account_number = A.account_number 
+        GROUP BY D.customer_name HAVING count(*) > 1 
+        ORDER BY sum(balance) DESC;
+
+
+     -->
+  </body>
+</html>

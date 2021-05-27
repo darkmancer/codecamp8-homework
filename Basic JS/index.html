@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //Lab 1
+      const name = "chayapol";
+      const human = name;
+      console.log(human);
+
+      //Lab 2
+      const wallet = 5000;
+      const fatherName = "father";
+      const motherName = "mother";
+      const address = "Thailand";
+      const ageOfGalaxy = 250000000;
+
+      //Excercise 3
+      let name = "Codecamp";
+
+      console.log(`hello ${1}`); //hello 1
+      console.log(`hello ${"name"}`); //hello name
+      console.log(`hello ${name}`); //hello Codecamp
+
+      //Exercise 4 operator
+      let a = 1,
+        b = 1;
+
+      let c = ++a; // 2
+      let d = b++; // 1
+
+      //Exercise 5
+      // 5 > 4 >>> true
+      // “apple” > “pineapple” >>> false
+      // “2” > “12” >>> true
+      // undefined == null >>> true
+      // undefined === null >>> false
+      // “bee” < “be” >>> fasle
+      // “bee” > “Bee” >>> true
+      // “Bee” < “be” >>> true
+
+      //Exercise 6 condition
+      if ("0") {
+        alert("Hello Codecamp #8");
+      }
+      // yes, alert
+
+      //Exercise 7 Homework
+      // 1. จงคำนวณค่าด้านล่างต่อไปนี้ และ คอมเม้นตอบหลังคำถาม
+      5 + "34"; // "534"
+      5 ** 4; // 625
+      5 - "4"; // 1
+      10 % 5; //0
+      5 % 10; // 5
+      2 ** 5 % 2; //0
+      "Java" + "Script"; //"JavaScript"
+      " " + " "; // "  "
+      " " + 0; // " 0"
+      20 + 4 + "15"; // "2415"
+      true + true; // 2
+      true + false; // 1
+      false + true; // 1
+      false - true; // -1
+      false - true + false - true + false; // -2
+      (true + true) ** 4; // 16
+      19 + true + "20"; // "2020"
+      3 - 4; // -1
+      "Bob" - "bill"; // NaN
+      "Code" + "Camp" + true + false + null + undefined; //'CodeCamptruefalsenullundefined'
+
+      // 2. จงคำนวณค่าเปรียบเทียบต่อไปนี้ และ คอมเม้นตอบด้านหลังเหมือนข้างบน
+      5 >= 1; // true
+      0 === 1; // false
+      4 <= 1; // false
+      1 != 1; // false
+      1 == "1"; // true
+      1 === "1"; // false
+      "2" == "2"; // true
+      "2" === "2"; //true
+      "12" !== 12; // true
+      "15" != 15; // false
+      "A" > "B"; // false
+      "B" < "C"; // true
+      "a" > "A"; // true
+      "b" < "A"; // false
+      "bee" > "bbe"; //true
+      "BeE" < "Bee"; // true
+      "SonTer" > "Soncom"; //false
+      "circle" > "circles"; // false
+      "NaRuTo" < "nArUtO"; // true
+      true === false; // false
+      true != true; // false
+
+      // 3. สร้าง String ที่มีค่า "Hello, It's me. "Mario"."
+      const string = `Hello, It's me. "Mario".`;
+
+      //Exercise 8 ตรรกะ
+      alert(null || 2 || undefined); //2
+      alert(alert(1) || 2 || alert(3)); //1 2
+      alert(1 && null && 2); // null
+      alert(alert(1) && alert(2)); // 1 undefined
+      alert(null || (2 && 3) || 4); // 3
+
+      //Exercise 9 Loop
+      let i = 3;
+
+      while (i) {
+        alert(i--);
+      }
+      // 0
+
+      //Exercise 10 Case
+      switch (browser) {
+        case "Edge":
+          alert("You've got the Edge!");
+          break;
+
+        case "Chrome":
+        case "Firefox":
+        case "Safari":
+        case "Opera":
+          alert("Okay we support these browsers too");
+          break;
+
+        default:
+          alert("We hope that this page looks ok!");
+      }
+
+      //answer
+      if (browser === "Edge") {
+        alert("You've got the Edge!");
+      } else if (
+        browser === "Chrome" ||
+        browser === "Firefox" ||
+        browser === "Safari" ||
+        browser === "Opera"
+      ) {
+        alert("Okay we support these browsers too");
+      } else {
+        alert("We hope that this page looks ok!");
+      }
+
+      //Exercise 12 Arrow function
+      function ask(question, yes, no) {
+        if (confirm(question)) yes();
+        else no();
+      }
+
+      ask(
+        "Do you agree?",
+        function () {
+          alert("You agreed.");
+        },
+        function () {
+          alert("You canceled the execution.");
+        }
+      );
+
+      //answer
+      const ask = (question, yes, no) => {
+        if (confirm(question)) yes();
+        else no();
+      };
+      ask(
+        "Do you agree?",
+        () => {
+          alert("You agreed.");
+        },
+        () => {
+          alert("You canceled the execution.");
+        }
+      );
+    </script>
+  </body>
+</html>

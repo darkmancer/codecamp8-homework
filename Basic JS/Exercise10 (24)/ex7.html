@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex7</title>
+</head>
+<body>
+
+    <script>
+        function draw(n) {
+            let num = '';
+            for (let i=n; i > 0; i--) {
+                    for(let j=n; j > 0; j--) {
+                        num += j + (n*(i-1))
+                    }
+                num += '\n'
+            }
+            console.log(num)
+        }
+
+        draw(4)
+        
+    </script>
+</body>
+</html>
